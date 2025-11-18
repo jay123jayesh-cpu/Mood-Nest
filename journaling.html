@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Journaling Space</title>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #FFF6E3, #E3FDFD);
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            color: white;
+            background: #6EC3F4;
+            cursor: pointer;
+        }
+
+        .btn:hover { background: #4fa7de; }
+
+        #saveMsg {
+            margin-top: 10px;
+            color: #2a6f97;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>📝 Journaling Space</h2>
+
+    <textarea id="journalText" placeholder="Write your thoughts here..."></textarea>
+
+    <button class="btn" onclick="saveJournal()">Save Entry</button>
+    <button class="btn" onclick="window.location.href='journal-history.html'">📘 View Journal History</button>
+    <button class="btn" onclick="window.location.href='home.html'">Back</button>
+
+    <div id="saveMsg"></div>
+</div>
+
+
+<script>
+    function saveJournal() {
+        const text = document.getElementById("journalText").value.trim();
+        if (text === "") {
+            document.getElementById("saveMsg").innerHTML = "Please write something first!";
+            return;
+        }
+
+        const now = new Date();
+        const date = now.toLocaleDateString();
+        const time = now.toLocaleTimeString();
+
+        let history = JSON.parse(localStorage.getItem("journalHistory")) || [];
+        history.push({ date: date, time: time, text: text });
+        localStorage.setItem("journalHistory", JSON.stringify(history));
+
+        document.getElementById("saveMsg").innerHTML = "Saved Successfully! 💙";
+        document.getElementById("journalText").value = "";
+    }
+</script>
+
+</body>
+</html>

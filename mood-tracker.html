@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mood Tracker</title>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #E3FDFD, #FFE6FA, #E8F3FF);
+            background-size: 400% 400%;
+            animation: gradientFlow 12s ease infinite;
+            font-family: Arial, sans-serif;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 420px;
+            margin: auto;
+            margin-top: 70px;
+            padding: 20px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(6px);
+        }
+
+        .emoji-row {
+            font-size: 35px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 0 15px;
+        }
+
+        input[type=range] {
+            width: 100%;
+        }
+
+        #moodValue {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #6EC3F4;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #4fa7de;
+        }
+
+        #saveStatus {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #3a6ea5;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Daily Mood Tracker</h2>
+    
+    <!-- ⭐ EMOJIS ABOVE SLIDER -->
+    <div class="emoji-row">
+        <span>😢</span>
+        <span>😕</span>
+        <span>😐</span>
+        <span>🙂</span>
+        <span>😁</span>
+    </div>
+
+    <!-- SLIDER -->
+    <input type="range" min="1" max="5" value="3" id="moodSlider">
+
+    <div id="moodValue">Mood: 😐 Neutral</div>
+
+    <!-- ⭐ SAVE BUTTON -->
+    <button class="btn" onclick="saveMood()">Save Mood</button>
+    <div id="saveStatus"></div>
+
+    <!-- BACK BUTTON -->
+    <button class="btn" onclick="window.location.href='home.html'">Back</button>
+
+</div>
+
+
+<script>
+    const slider = document.getElementById("moodSlider");
+    const moodText = document.getElementById("moodValue");
+    const saveStatus = document.getElementById("saveStatus");
+
+    const moods = {
+        1: "😢 Very Sad",
+        2: "😕 Sad",
+        3: "😐 Neutral",
+        4: "🙂 Happy",
+        5: "😁 Very Happy"
+    };
+
+    slider.oninput = function () {
+        moodText.innerHTML = "Mood: " + moods[this.value];
+    };
+
+    function saveMood() {
+    const mood = moods[slider.value];
+    const date = new Date().toLocaleDateString();
+
+    let history = JSON.parse(localStorage.getItem("moodHistory")) || [];
+    history.push({ date: date, mood: mood });
+    localStorage.setItem("moodHistory", JSON.stringify(history));
+
+    saveStatus.innerHTML = "Mood Saved! 💙";
+}
+
+</script>
+
+</body>
+</html>

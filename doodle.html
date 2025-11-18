@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doodle Pad</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container fade-in">
+    <h1>Doodle Your Feelings 🎨</h1>
+
+    <canvas id="canvas" width="350" height="350"></canvas>
+
+    <br>
+    <button class="btn" onclick="clearCanvas()">Clear</button>
+    <button class="btn back-btn" onclick="window.location.href='home.html'">Back</button>
+</div>
+
+<script>
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+    let drawing = false;
+
+    canvas.addEventListener("mousedown", () => drawing = true);
+    canvas.addEventListener("mouseup", () => drawing = false);
+    canvas.addEventListener("mousemove", (e) => {
+        if (!drawing) return;
+        ctx.fillStyle = "#333";
+        ctx.beginPath();
+        ctx.arc(e.offsetX, e.offsetY, 5, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+</script>
+
+</body>
+</html>

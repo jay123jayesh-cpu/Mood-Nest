@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mood Nest - Home</title>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #E3FDFD, #FFE6FA, #E8F3FF);
+            background-size: 400% 400%;
+            animation: gradientFlow 12s ease infinite;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4A90E2;
+            margin-bottom: 30px;
+            font-size: 36px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: #6EC3F4;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #4fa7de;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome to Mood Nest</h1>
+
+    <button onclick="window.location.href='mood-tracker.html'">😊 Mood Tracker</button>
+    <button onclick="window.location.href='mood-history.html'">📘 Mood History</button>
+    <button onclick="window.location.href='journaling.html'">📒 Journaling Space</button>
+    <button onclick="window.location.href='journal-history.html'">📘 Journal History</button>
+    <button onclick="window.location.href='breathing.html'">🌬 Breathing Relaxation</button>
+    <button onclick="window.location.href='sound.html'">🎵 Sound Therapy</button>
+    <button onclick="window.location.href='doodle.html'">🎨 Doodling</button>
+</div>
+
+</body>
+</html>
